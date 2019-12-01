@@ -25,6 +25,16 @@ DefinitionBlock ("", "SSDT", 2, "HP14AC", "UIAC", 0)
 
         Name(RMCF, Package()
         {
+            "AppleBusPowerController", Package()
+            {
+                // these values happen to be iMac12,2 values...
+                "kUSBSleepPortCurrentLimit", 2100,
+                "kUSBSleepPowerSupply", 2500,
+                "kUSBWakePortCurrentLimit", 2100,
+                "kUSBWakePowerSupply", 2500,
+            },
+            
+            
             "HUB1", Package()
             {
                 "port-count", Buffer() { 8, 0, 0, 0 },

@@ -12,8 +12,9 @@ DefinitionBlock("", "SSDT", 2, "HP14AC", "HP14AC", 0)
     #include "SSDT-BATT.dsl"
     #include "SSDT-FANREAD.dsl"
     #include "SSDT-UIAC.dsl"
-    #include "SSDT-EH01.dsl" 
-    #include "SSDT-XHC.dsl" 
+    //#include "SSDT-USBX.dsl"
+    //#include "SSDT-EH01.dsl" 
+    //#include "SSDT-XHC.dsl" 
     
     
     

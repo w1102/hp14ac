@@ -18,7 +18,7 @@ IASL=iasl
 .PHONY: all
 all: $(PRODUCTS)
 
-$(BUILDDIR)/SSDT-HP14AC.aml: SSDT-HP14AC.dsl  SSDT-PNLF.dsl SSDT-PS2K.dsl SSDT-Q13.dsl SSDT-BATT.dsl SSDT-FANREAD.dsl SSDT-UIAC.dsl SSDT-EH01.dsl SSDT-SMBUS.dsl SSDT-XOSI.dsl SSDT-GPRW.dsl SSDT-PTSWAK.dsl SSDT-XHC.dsl
+$(BUILDDIR)/SSDT-HP14AC.aml: SSDT-HP14AC.dsl  SSDT-PNLF.dsl SSDT-PS2K.dsl SSDT-Q13.dsl SSDT-BATT.dsl SSDT-FANREAD.dsl SSDT-UIAC.dsl SSDT-SMBUS.dsl SSDT-XOSI.dsl SSDT-GPRW.dsl SSDT-PTSWAK.dsl #SSDT-USBX.dsl
 	$(IASL) $(IASLFLAGS) -p $@ $<
 
 
@@ -29,6 +29,6 @@ install: $(BUILDDIR)/SSDT-HP14AC.aml
 	rm -f "$(EFIDIR)"/EFI/CLOVER/ACPI/patched/SSDT-*.aml "$(EFIDIR)"/EFI/CLOVER/ACPI/patched/SSDT.aml
 	cp $< "$(EFIDIR)"/EFI/CLOVER/ACPI/patched
 
-
-
-#EOF
+.PHONY: pmset
+pmset: 
+	sudo sh ./pmset/pmset-def.sh

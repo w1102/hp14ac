@@ -15,9 +15,9 @@ DefinitionBlock("", "SSDT", 2, "HP14AC", "USBX", 0)
             {
                 //REVIEW: these values from MacBookPro12,1 (pure guess)
                 "kUSBSleepPortCurrentLimit", 2100,
-                "kUSBSleepPowerSupply", 2600,
+                "kUSBSleepPowerSupply", 2500,
                 "kUSBWakePortCurrentLimit", 2100,
-                "kUSBWakePowerSupply", 3200,
+                "kUSBWakePowerSupply", 2500,
             })
         }
     }
