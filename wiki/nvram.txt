@@ -1,0 +1,11 @@
+sudo nvram TestVar=HelloWorld
+
+
+sudo nvram -p | grep 'TestVar'
+
+
+sudo nvram -d TestVar
+
+
+
+NVRAM Testing: You can test if your NVRAM is working by running the following Terminal command and rebooting: sudo nvram TestVar=HelloWorld; once you reboot, run: sudo nvram -p | grep 'TestVar'; if you see a result, your NVRAM is working; if not, your NVRAM is broken and needs to be fixed, or otherwise iMessage won't work; after testing, you can delete the TestVar variable by running: sudo nvram -d TestVar
