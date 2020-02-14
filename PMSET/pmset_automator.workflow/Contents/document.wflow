@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AMApplicationBuild</key>
-	<string>490</string>
+	<string>492</string>
 	<key>AMApplicationVersion</key>
 	<string>2.10</string>
 	<key>AMDocumentVersion</key>
@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run {input, parameters}		do shell script " sudo pmset -a tcpkeepalive 0 ttyskeepawake 0 hibernatemode 0 standby 0 autopoweroff 0 proximitywake 0 autopoweroffdelay 0 halfdim 1 womp 0 powernap 0" user name "****" password "****" with administrator privileges		return inputend run</string>
+					<string>on run {input, parameters}		do shell script " sudo pmset -a tcpkeepalive 0 ttyskeepawake 0 proximitywake 0 hibernatemode 0 standby 1 standbydelayhigh 180  standbydelaylow 180 autopoweroff 0  autopoweroffdelay 600 halfdim 1 womp 0 powernap 0 networkoversleep 0" user name "tranquang" password "1102" with administrator privileges		return inputend run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
