@@ -1,32 +1,45 @@
-//Fix HPET,RTC,TIMR
-#ifndef NO_DEFINITIONBLOCK
-DefinitionBlock ("", "SSDT", 2, "ACDT", "HRTfix", 0)
+/*
+ * Intel ACPI Component Architecture
+ * AML/ASL+ Disassembler version 20200110 (64-bit version)
+ * Copyright (c) 2000 - 2020 Intel Corporation
+ * 
+ * Disassembling to symbolic ASL+ operators
+ *
+ * Disassembly of iASLJ7BfLx.aml, Tue Jun 23 19:58:25 2020
+ *
+ * Original Table Header:
+ *     Signature        "SSDT"
+ *     Length           0x000001DA (474)
+ *     Revision         0x02
+ *     Checksum         0x81
+ *     OEM ID           "ACDT"
+ *     OEM Table ID     "HRTfix"
+ *     OEM Revision     0x00000000 (0)
+ *     Compiler ID      "INTL"
+ *     Compiler Version 0x20180427 (538444839)
+ */
+DefinitionBlock ("", "SSDT", 2, "ACDT", "HRTfix", 0x00000000)
 {
-#endif     
-    External (_SB.PCI0.LPCB, DeviceObj)
-    External (_SB.PCI0.LPCB.RTC, DeviceObj)
-    External (_SB.PCI0.LPCB.TIMR, DeviceObj)
+    External (_SB_.PCI0.LPCB, DeviceObj)
+    External (_SB_.PCI0.LPCB.RTC_, DeviceObj)
+    External (_SB_.PCI0.LPCB.TIMR, DeviceObj)
     External (HPAE, IntObj)
-    //External (HPTE, IntObj)
-    
-    //disable HPET
+
     Scope (\)
     {
         If (_OSI ("Darwin"))
         {
-            HPAE =0
-            //HPTE =0
+            HPAE = Zero
         }
     }
-    
-    //disable RTC
+
     Scope (_SB.PCI0.LPCB.RTC)
     {
-        Method (_STA, 0, NotSerialized)
+        Method (_STA, 0, NotSerialized)  // _STA: Status
         {
             If (_OSI ("Darwin"))
             {
-                Return (0)
+                Return (Zero)
             }
             Else
             {
@@ -34,15 +47,14 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "HRTfix", 0)
             }
         }
     }
-    
-    //disable TIMR
+
     Scope (_SB.PCI0.LPCB.TIMR)
     {
-        Method (_STA, 0, NotSerialized)
+        Method (_STA, 0, NotSerialized)  // _STA: Status
         {
             If (_OSI ("Darwin"))
             {
-                Return (0)
+                Return (Zero)
             }
             Else
             {
@@ -50,23 +62,23 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "HRTfix", 0)
             }
         }
     }
-    
+
     Scope (_SB.PCI0.LPCB)
     {
-        //Fake HPE0
         Device (HPE0)
         {
-            Name (_HID, EisaId ("PNP0103"))
-            Name (_UID, Zero)
+            Name (_HID, EisaId ("PNP0103") /* HPET System Timer */)  // _HID: Hardware ID
+            Name (_UID, Zero)  // _UID: Unique ID
             Name (BUF0, ResourceTemplate ()
             {
-                IRQNoFlags() { 0, 8 }
+                IRQNoFlags ()
+                    {0,8}
                 Memory32Fixed (ReadWrite,
-                    0xFED00000,
-                    0x00000400,
+                    0xFED00000,         // Address Base
+                    0x00000400,         // Address Length
                     )
             })
-            Method (_STA, 0, NotSerialized)
+            Method (_STA, 0, NotSerialized)  // _STA: Status
             {
                 If (_OSI ("Darwin"))
                 {
@@ -74,29 +86,29 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "HRTfix", 0)
                 }
                 Else
                 {
-                    Return (0)
+                    Return (Zero)
                 }
             }
-            Method (_CRS, 0, Serialized)
+
+            Method (_CRS, 0, Serialized)  // _CRS: Current Resource Settings
             {
-                Return (BUF0)
+                Return (BUF0) /* \_SB_.PCI0.LPCB.HPE0.BUF0 */
             }
         }
 
-        //Fake RTC0
         Device (RTC0)
         {
-            Name (_HID, EisaId ("PNP0B00"))
-            Name (_CRS, ResourceTemplate ()
+            Name (_HID, EisaId ("PNP0B00") /* AT Real-Time Clock */)  // _HID: Hardware ID
+            Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
             {
                 IO (Decode16,
-                    0x0070, 
-                    0x0070, 
-                    0x01, 
-                    0x02,
+                    0x0070,             // Range Minimum
+                    0x0070,             // Range Maximum
+                    0x01,               // Alignment
+                    0x08,               // Length
                     )
             })
-            Method (_STA, 0, NotSerialized)
+            Method (_STA, 0, NotSerialized)  // _STA: Status
             {
                 If (_OSI ("Darwin"))
                 {
@@ -104,31 +116,30 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "HRTfix", 0)
                 }
                 Else
                 {
-                    Return (0)
+                    Return (Zero)
                 }
             }
         }
-        
-        //Fake TIM0
+
         Device (TIM0)
         {
-            Name (_HID, EisaId ("PNP0100"))
-            Name (_CRS, ResourceTemplate ()
+            Name (_HID, EisaId ("PNP0100") /* PC-class System Timer */)  // _HID: Hardware ID
+            Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
             {
                 IO (Decode16,
-                    0x0040,
-                    0x0040,
-                    0x01,
-                    0x04,
+                    0x0040,             // Range Minimum
+                    0x0040,             // Range Maximum
+                    0x01,               // Alignment
+                    0x04,               // Length
                     )
                 IO (Decode16,
-                    0x0050,
-                    0x0050,
-                    0x10,
-                    0x04,
+                    0x0050,             // Range Minimum
+                    0x0050,             // Range Maximum
+                    0x10,               // Alignment
+                    0x04,               // Length
                     )
             })
-            Method (_STA, 0, NotSerialized)
+            Method (_STA, 0, NotSerialized)  // _STA: Status
             {
                 If (_OSI ("Darwin"))
                 {
@@ -136,11 +147,10 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "HRTfix", 0)
                 }
                 Else
                 {
-                    Return (0)
+                    Return (Zero)
                 }
             }
         }
     }
-#ifndef NO_DEFINITIONBLOCK
 }
-#endif 
+
