@@ -1482,19 +1482,18 @@
 			<key>AdviseWindows</key>
 			<false/>
 			<key>MLB</key>
-			<string>C02840500QXG91QA8</string>
+			<string></string>
 			<key>ROM</key>
 			<data>
-			sFrasd0b
 			</data>
 			<key>SpoofVendor</key>
 			<true/>
 			<key>SystemProductName</key>
 			<string>MacBookAir7,2</string>
 			<key>SystemSerialNumber</key>
-			<string>C02XHYZ9G940</string>
+			<string></string>
 			<key>SystemUUID</key>
-			<string>2704103E-8095-4D10-9699-262BCAB973B8</string>
+			<string></string>
 		</dict>
 		<key>UpdateDataHub</key>
 		<true/>
