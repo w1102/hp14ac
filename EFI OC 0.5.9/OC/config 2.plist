@@ -807,7 +807,7 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/IO80211Family</string>
 				<key>MaxKernel</key>
@@ -823,7 +823,7 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/AirPortAtheros40</string>
 				<key>MaxKernel</key>
@@ -839,7 +839,7 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/AirPortBrcm4331</string>
 				<key>MaxKernel</key>
@@ -855,7 +855,7 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/AirPortBrcm4360</string>
 				<key>MaxKernel</key>
@@ -871,7 +871,7 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/AirPortBrcmNIC</string>
 				<key>MaxKernel</key>
@@ -887,7 +887,7 @@
 				<key>Comment</key>
 				<string></string>
 				<key>Enabled</key>
-				<true/>
+				<false/>
 				<key>ExecutablePath</key>
 				<string>Contents/MacOS/IO80211NetBooter</string>
 				<key>MaxKernel</key>
@@ -1060,18 +1060,6 @@
 		</array>
 		<key>Block</key>
 		<array>
-			<dict>
-				<key>Comment</key>
-				<string>IO80211Family.kext</string>
-				<key>Enabled</key>
-				<true/>
-				<key>Identifier</key>
-				<string>com.apple.iokit.IO80211Family</string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>MinKernel</key>
-				<string></string>
-			</dict>
 			<dict>
 				<key>Comment</key>
 				<string></string>
@@ -1413,7 +1401,7 @@
 				Rg==
 				</data>
 				<key>boot-args</key>
-				<string>alcid=3 uia_exclude=HP15,HP16 -v</string>
+				<string>alcid=3 uia_exclude=HP15,HP16</string>
 				<key>csr-active-config</key>
 				<data>
 				ZwAAAA==
@@ -1482,19 +1470,18 @@
 			<key>AdviseWindows</key>
 			<false/>
 			<key>MLB</key>
-			<string>C02840500QXG91QA8</string>
+			<string></string>
 			<key>ROM</key>
 			<data>
-			sFrasd0b
 			</data>
 			<key>SpoofVendor</key>
 			<true/>
 			<key>SystemProductName</key>
 			<string>MacBookAir7,2</string>
 			<key>SystemSerialNumber</key>
-			<string>C02XHYZ9G940</string>
+			<string></string>
 			<key>SystemUUID</key>
-			<string>2704103E-8095-4D10-9699-262BCAB973B8</string>
+			<string></string>
 		</dict>
 		<key>UpdateDataHub</key>
 		<true/>
