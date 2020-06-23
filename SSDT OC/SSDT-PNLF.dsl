@@ -17,8 +17,12 @@
 #define CUSTOM_PWMMAX_1499 0x1499
 #define COFFEELAKE_PWMMAX 0xffff
 
+
+#ifndef NO_DEFINITIONBLOCK
 DefinitionBlock("", "SSDT", 2, "ACDT", "PNLF", 0)
 {
+#endif 
+
     External(RMCF.BKLT, IntObj)
     External(RMCF.LMAX, IntObj)
     External(RMCF.LEVW, IntObj)
@@ -253,4 +257,9 @@ DefinitionBlock("", "SSDT", 2, "ACDT", "PNLF", 0)
             Else { _UID = 99 }
         }
     }
+
+
+#ifndef NO_DEFINITIONBLOCK
 }
+#endif 
+
