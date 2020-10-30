@@ -1,3 +1,0 @@
-mount -uw /
-chmod 755 efi
-sudo cp efi /usr/bin/

@@ -84,5 +84,5 @@ if [[ -z "$EFIMountPoint" ]]; then
     code=$?
 fi
 echo $EFIMountPoint
-open $EFIMountPoint
+Open $EFIMountPoint
 exit $code
