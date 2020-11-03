@@ -437,125 +437,129 @@ DefinitionBlock ("", "SSDT", 2, "HP14AC", "Battery", 0x00000000) {
             }
             Else { Return (\_SB.PCI0.LPCB.H_EC.XBTI ()) }
         }
-
-        Method (_Q09, 0, NotSerialized) // _Qxx: EC Query
-        {
-            If (_OSI ("Darwin")) {
-                P8XH (0x04, 0x09, One)
-                PWUP (0x05, One)
-                If (BTDR (0x02)) {
-                    Notify (BAT0, 0x80)
-                }
-
-                If (LEqual (B1B2 (RC00, RC01), B1B2 (FC00, FC01))) {
-                    Notify (BAT0, 0x81)
-                }
-            }
-            Else {\_SB.PCI0.LPCB.H_EC.XQ09 () }
-        }
-
-        Method (_Q11, 0, NotSerialized) // _Qxx: EC Query
-        {
-            If (_OSI ("Darwin")) {
-                External (\_PR.CPU0, DeviceObj)
-                External (\_PR.CPU1, DeviceObj)
-                External (\_PR.CPU2, DeviceObj)
-                External (\_PR.CPU3, DeviceObj)
-                External (\_PR.CPU4, DeviceObj)
-                External (\_PR.CPU5, DeviceObj)
-                External (\_PR.CPU6, DeviceObj)
-                External (\_PR.CPU7, DeviceObj)
-                External (\_PR.CPU0._PPC, IntObj)
-
-                Subtract (NPS, One, NPS)
-                If (CondRefOf (\_PR.CPU0._PPC, Local0)) {
-                    Store (NPS, \_PR.CPU0._PPC)
-                    Notify (\_PR.CPU0, 0x80)
-                }
-
-                If (CondRefOf (\_PR.CPU1._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU1._PPC)
-                    Notify (\_PR.CPU1, 0x80)
-                }
-
-                If (CondRefOf (\_PR.CPU2._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU2._PPC)
-                    Notify (\_PR.CPU2, 0x80)
-                }
-
-                If (CondRefOf (\_PR.CPU3._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU3._PPC)
-                    Notify (\_PR.CPU3, 0x80)
-                }
-
-                If (CondRefOf (\_PR.CPU4._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU4._PPC)
-                    Notify (\_PR.CPU4, 0x80)
-                }
-
-                If (CondRefOf (\_PR.CPU5._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU5._PPC)
-                    Notify (\_PR.CPU5, 0x80)
-                }
-
-                If (CondRefOf (\_PR.CPU6._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU6._PPC)
-                    Notify (\_PR.CPU6, 0x80)
-                }
-
-                If (CondRefOf (\_PR.CPU7._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU7._PPC)
-                    Notify (\_PR.CPU7, 0x80)
-                }
-            }
-            Else {\_SB.PCI0.LPCB.H_EC.XQ11 () }
-        }
         
-        Method (_Q10, 0, NotSerialized) // _Qxx: EC Query
-        {
-            If (_OSI ("Darwin")) {
-                Add (NPS, One, NPS)
-                If (CondRefOf (\_PR.CPU0._PPC, Local0)) {
-                    Store (NPS, \_PR.CPU0._PPC)
-                    Notify (\_PR.CPU0, 0x80)
-                }
+        
+//        
+//        Method (_Q09, 0, NotSerialized) // _Qxx: EC Query
+//        {
+//            If (_OSI ("Darwin")) {
+//                P8XH (0x04, 0x09, One)
+//                PWUP (0x05, One)
+//                If (BTDR (0x02)) {
+//                    Notify (BAT0, 0x80)
+//                }
 
-                If (CondRefOf (\_PR.CPU1._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU1._PPC)
-                    Notify (\_PR.CPU1, 0x80)
-                }
+//                If (LEqual (B1B2 (RC00, RC01), B1B2 (FC00, FC01))) {
+//                    Notify (BAT0, 0x81)
+//                }
+//            }
+//            Else {\_SB.PCI0.LPCB.H_EC.XQ09 () }
+//        }
 
-                If (CondRefOf (\_PR.CPU2._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU2._PPC)
-                    Notify (\_PR.CPU2, 0x80)
-                }
+//        Method (_Q11, 0, NotSerialized) // _Qxx: EC Query
+//        {
+//            If (_OSI ("Darwin")) {
+//                External (\_PR.CPU0, DeviceObj)
+//                External (\_PR.CPU1, DeviceObj)
+//                External (\_PR.CPU2, DeviceObj)
+//                External (\_PR.CPU3, DeviceObj)
+//                External (\_PR.CPU4, DeviceObj)
+//                External (\_PR.CPU5, DeviceObj)
+//                External (\_PR.CPU6, DeviceObj)
+//                External (\_PR.CPU7, DeviceObj)
+//                External (\_PR.CPU0._PPC, IntObj)
 
-                If (CondRefOf (\_PR.CPU3._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU3._PPC)
-                    Notify (\_PR.CPU3, 0x80)
-                }
+//                Subtract (NPS, One, NPS)
+//                If (CondRefOf (\_PR.CPU0._PPC, Local0)) {
+//                    Store (NPS, \_PR.CPU0._PPC)
+//                    Notify (\_PR.CPU0, 0x80)
+//                }
 
-                If (CondRefOf (\_PR.CPU4._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU4._PPC)
-                    Notify (\_PR.CPU4, 0x80)
-                }
+//                If (CondRefOf (\_PR.CPU1._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU1._PPC)
+//                    Notify (\_PR.CPU1, 0x80)
+//                }
 
-                If (CondRefOf (\_PR.CPU5._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU5._PPC)
-                    Notify (\_PR.CPU5, 0x80)
-                }
+//                If (CondRefOf (\_PR.CPU2._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU2._PPC)
+//                    Notify (\_PR.CPU2, 0x80)
+//                }
 
-                If (CondRefOf (\_PR.CPU6._PPC, Local0)) {
-                    //Store (NPS, \_PR.CPU6._PPC)
-                    Notify (\_PR.CPU6, 0x80)
-                }
+//                If (CondRefOf (\_PR.CPU3._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU3._PPC)
+//                    Notify (\_PR.CPU3, 0x80)
+//                }
 
-                If (CondRefOf (\_PR.CPU7._PPC, Local0)) {
-                    Notify (\_PR.CPU7, 0x80)
-                }
-            }
-            Else {\_SB.PCI0.LPCB.H_EC.XQ10 () }
-        }
+//                If (CondRefOf (\_PR.CPU4._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU4._PPC)
+//                    Notify (\_PR.CPU4, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU5._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU5._PPC)
+//                    Notify (\_PR.CPU5, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU6._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU6._PPC)
+//                    Notify (\_PR.CPU6, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU7._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU7._PPC)
+//                    Notify (\_PR.CPU7, 0x80)
+//                }
+//            }
+//            Else {\_SB.PCI0.LPCB.H_EC.XQ11 () }
+//        }
+//        
+//        Method (_Q10, 0, NotSerialized) // _Qxx: EC Query
+//        {
+//            If (_OSI ("Darwin")) {
+//                Add (NPS, One, NPS)
+//                If (CondRefOf (\_PR.CPU0._PPC, Local0)) {
+//                    Store (NPS, \_PR.CPU0._PPC)
+//                    Notify (\_PR.CPU0, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU1._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU1._PPC)
+//                    Notify (\_PR.CPU1, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU2._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU2._PPC)
+//                    Notify (\_PR.CPU2, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU3._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU3._PPC)
+//                    Notify (\_PR.CPU3, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU4._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU4._PPC)
+//                    Notify (\_PR.CPU4, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU5._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU5._PPC)
+//                    Notify (\_PR.CPU5, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU6._PPC, Local0)) {
+//                    //Store (NPS, \_PR.CPU6._PPC)
+//                    Notify (\_PR.CPU6, 0x80)
+//                }
+
+//                If (CondRefOf (\_PR.CPU7._PPC, Local0)) {
+//                    Notify (\_PR.CPU7, 0x80)
+//                }
+//            }
+//            Else {\_SB.PCI0.LPCB.H_EC.XQ10 () }
+//        }
+
+
         
         
         

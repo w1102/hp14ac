@@ -1,29 +1,55 @@
-// For solving instant wake by hooking GPRW or UPRW
-
+/*
+ * Intel ACPI Component Architecture
+ * AML/ASL+ Disassembler version 20200528 (64-bit version)
+ * Copyright (c) 2000 - 2020 Intel Corporation
+ * 
+ * Disassembling to non-symbolic legacy ASL operators
+ *
+ * Disassembly of SSDT-GPRW.aml, Wed Oct 14 11:23:45 2020
+ *
+ * Original Table Header:
+ *     Signature        "SSDT"
+ *     Length           0x00000065 (101)
+ *     Revision         0x02
+ *     Checksum         0xBC
+ *     OEM ID           "hack"
+ *     OEM Table ID     "GPRW"
+ *     OEM Revision     0x00000000 (0)
+ *     Compiler ID      "INTL"
+ *     Compiler Version 0x20180427 (538444839)
+ */
 #ifndef NO_DEFINITIONBLOCK
-DefinitionBlock("", "SSDT", 2, "hack", "_GPRW", 0)
+DefinitionBlock ("", "SSDT", 2, "hack", "GPRW", 0x00000000)
 {
-#endif
-    External(XPRW, MethodObj)
-  
+#endif   
+    
+    External (XPRW, MethodObj)    // 2 Arguments
 
-    // In DSDT, native GPRW is renamed to XPRW with Clover binpatch.
-    // As a result, calls to GPRW land here.
-    // The purpose of this implementation is to avoid "instant wake"
-    // by returning 0 in the second position (sleep state supported)
-    // of the return package.
-    Method(GPRW, 2)
+    Method (GPRW, 2, NotSerialized)
     {
         If (_OSI ("Darwin"))
         {
-            If (0x6d == Arg0) { Return (Package() { 0x6d, 0, }) }
-            If (0x0d == Arg0) { Return (Package() { 0x0d, 0, }) }  
+            If (LEqual (0x6D, Arg0))
+            {
+                Return (Package (0x02)
+                {
+                    0x6D, 
+                    Zero
+                })
+            }
+
+            If (LEqual (0x0D, Arg0))
+            {
+                Return (Package (0x02)
+                {
+                    0x0D, 
+                    Zero
+                })
+            }
         }
-        Return (XPRW(Arg0, Arg1)) 
+
+        Return (XPRW (Arg0, Arg1))
     }
-    
-    
 #ifndef NO_DEFINITIONBLOCK
 }
-#endif
-//EOF
+#endif   

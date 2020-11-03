@@ -1,57 +1,30 @@
 /*
- * AppleUsbPower compatibility table for legacy hardware.
+ * Intel ACPI Component Architecture
+ * AML/ASL+ Disassembler version 20200528 (64-bit version)
+ * Copyright (c) 2000 - 2020 Intel Corporation
+ * 
+ * Disassembling to non-symbolic legacy ASL operators
  *
- * Be warned that power supply values can be different
- * for different systems. Depending on the configuration
- * the values must be present in injected IOKitPersonalities
- * for com.apple.driver.AppleUSBMergeNub. iPad remains being
- * the most reliable device for testing USB port charging.
+ * Disassembly of SSDT-EC.aml, Wed Oct 14 11:23:45 2020
  *
- * Try NOT to rename EC0, H_EC, etc. to EC.
- * These devices are incompatible with macOS and may break
- * at any time. AppleACPIEC kext must NOT load.
- * See the disable code below.
- *
- * Reference USB: https://applelife.ru/posts/550233
- * Reference EC: https://applelife.ru/posts/807985
+ * Original Table Header:
+ *     Signature        "SSDT"
+ *     Length           0x0000007D (125)
+ *     Revision         0x02
+ *     Checksum         0x4A
+ *     OEM ID           "APPLE "
+ *     OEM Table ID     "SsdtEC"
+ *     OEM Revision     0x00001000 (4096)
+ *     Compiler ID      "INTL"
+ *     Compiler Version 0x20180427 (538444839)
  */
-
 #ifndef NO_DEFINITIONBLOCK
-DefinitionBlock ("", "SSDT", 2, "ACDT", "SsdtEC", 0x00001000)
+DefinitionBlock ("", "SSDT", 2, "hack ", "SsdtEC", 0x00001000)
 {
-#endif 
-    
+#endif
+    //#ifndef NO_DEFINITIONBLOCK
     External (_SB_.PCI0.LPCB, DeviceObj)
-
-    /*
-     * Uncomment replacing EC0 with your own value in case your
-     * motherboard has an existing embedded controller of PNP0C09 type.
-     *
-     * While renaming EC0 to EC might potentially work initially,
-     * it connects an incompatible driver (AppleACPIEC) to your hardware.
-     * This can make your system unbootable at any time or hide bugs that
-     * could trigger randomly.
-     */
-
-    /**
-    External (_SB_.PCI0.LPCB.EC0, DeviceObj)
-
-    Scope (\_SB.PCI0.LPCB.EC0)
-    {
-        Method (_STA, 0, NotSerialized)  // _STA: Status
-        {
-            If (_OSI ("Darwin"))
-            {
-                Return (0)
-            }
-            Else
-            {
-                Return (0x0F)
-            }
-        }
-    }
-    **/
-
+    //#endif
     Scope (\_SB.PCI0.LPCB)
     {
         Device (EC)
@@ -72,4 +45,4 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "SsdtEC", 0x00001000)
     }
 #ifndef NO_DEFINITIONBLOCK
 }
-#endif 
+#endif

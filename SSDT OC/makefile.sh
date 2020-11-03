@@ -22,8 +22,7 @@ rm:
 	if [ -f $(BUILDDIR)/SSDT-HP14AC.aml ]; then \
 		mv $(BUILDDIR)/SSDT-HP14AC.aml $(BUILDDIR)/OLD; \
 	fi
-$(BUILDDIR)/SSDT-HP14AC.aml: SSDT-HP14AC.dsl SSDT-BATT.dsl SSDT-EC.dsl SSDT-GPRW.dsl SSDT-HPET_IPIC_RTC_TIMR.dsl SSDT-PLUG.dsl SSDT-USB.dsl SSDT-PNLF.dsl SSDT-PS2k.dsl SSDT-Q13.dsl SSDT-MCHC-MEM2-SBUS-SLPB.dsl
-	$(IASL) $(IASLFLAGS) -p $@ $<
+
 
 .PHONY: install
 install: $(BUILDDIR)/SSDT-HP14AC.aml
